@@ -58,7 +58,7 @@ function tabHandler(e) {
 }
 
 function noteDestroyer(e){
-    e.target.parentElement.parentElement.parentElement.remove()
+    e.currentTarget.parentElement.parentElement.remove();
 }
 
 function modificationHandler(e){
