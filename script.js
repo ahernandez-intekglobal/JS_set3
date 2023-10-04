@@ -13,8 +13,8 @@ function newNote(id, title="New note", text="", left, top, creationDate, modific
     noteClone.querySelector(".note_input_title").value = title;
     noteDiv.style.left = left ? left : 0;
     noteDiv.style.top = top ? top : 42;
-    noteDiv.setAttribute('creation_date', creationDate ? creationDate : new Date().toLocaleDateString());
-    noteDiv.setAttribute('modification_date', modificationDate ? modificationDate : new Date().toLocaleDateString());
+    noteDiv.querySelector('input[name="creation_date"]').value = creationDate ? creationDate : new Date().toLocaleDateString();
+    noteDiv.querySelector('input[name="modification_date"]').value = modificationDate ? modificationDate : new Date().toLocaleDateString();
     if (id === undefined){
         noteCount += 1;
     }
@@ -24,13 +24,18 @@ function newNote(id, title="New note", text="", left, top, creationDate, modific
 
 
 function startDrag(e) {
-    if (e.target.classList.contains("note_header") ){
-        let diffX = e.clientX - e.target.parentElement.offsetLeft;
-        let diffY = e.clientY - e.target.parentElement.offsetTop;
+    // To only work with header
+    if (e.target.classList.contains("note_header")){
+        let diffX = e.clientX - e.currentTarget.offsetLeft;
+        let diffY = e.clientY - e.currentTarget.offsetTop;
         
+        // to not select any document target
         function moveAlong(e) {
-            e.target.parentElement.style.left = (e.clientX - diffX) + 'px';
-            e.target.parentElement.style.top = (e.clientY - diffY) + 'px';
+            if (e.target.classList.contains("note_header")){
+                console.log(e.target.parentElement);
+                e.target.parentElement.style.left = (e.clientX - diffX) + 'px';
+                e.target.parentElement.style.top = (e.clientY - diffY) + 'px';
+            }
         }
         
         function stopDrag() {
@@ -62,7 +67,7 @@ function noteDestroyer(e){
 }
 
 function modificationHandler(e){
-    e.target.parentElement.setAttribute("modification_date", new Date().toLocaleDateString());
+    e.currentTarget.parentElement.querySelector('input[name="modification_date"]').value = new Date().toLocaleDateString();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -90,8 +95,8 @@ window.addEventListener("beforeunload", function () {
             text: note.querySelector(".note_input_body").value,
             left: note.style.left,
             top: note.style.top,
-            creationDate: note.getAttribute("creation_date"),
-            modificationDate: note.getAttribute("modification_date"),
+            creationDate: note.querySelector('input[name="creation_date"]').value,
+            modificationDate: note.querySelector('input[name="modification_date"]').value,
         });
     }
     localStorage.setItem('noteArray', JSON.stringify(newNoteArray));

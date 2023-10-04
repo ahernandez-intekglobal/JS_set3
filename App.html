@@ -23,7 +23,17 @@
                 <button onclick="noteDestroyer(event)"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <input type="text" class="note_input_title" value="New note">
-            <textarea class="note_input_body" cols="30" rows="10" onchange="modificationHandler(event)"></textarea>
+            <textarea class="note_input_body" cols="30" rows="8" onchange="modificationHandler(event)"></textarea>
+            <div class="date">
+                <p for="creation_date">creation: </p>
+                <input type="text" name="creation_date" disabled>
+            </div>
+            <div class="date">
+                <p>last modification: </p>
+                <input type="text" name="modification_date" disabled>
+            </div>
+            <!-- <p class="creation_date">creation: </p>
+            <p class="modification_date">last modification: </p> -->
         </div>
     </template>
     <script src="script.js"></script>

@@ -32,7 +32,7 @@ h1 {
 .note {
   position: absolute;
   width: 260px;
-  height: 260px;
+  height: 285px;
   padding: 0px;
   background-color: antiquewhite;
   border: 2px solid #424242;
@@ -99,4 +99,21 @@ h1 {
 
 .note button:hover {
   background-color: #baafa0;
+}
+
+.note .date p{
+  padding-left: 6px;
+  font-family: 'Arial', sans-serif;
+  color: #828282;
+  background-color: antiquewhite;
+  margin: 0 2px 0;
+}
+
+.note .date input{
+  width:80%;
+  font-style: italic;
+  color: #828282;
+  background-color: antiquewhite;
+  border: none;
+  padding-left: 12px;
 }
